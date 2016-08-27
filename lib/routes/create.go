@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"os"
 	"unicode/utf8"
 )
 
@@ -23,7 +24,7 @@ func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	blob, err := action(contents)
+	blob, err := createImage(contents)
 	if err != nil {
 		http.Error(w, "failed to parse file", http.StatusBadRequest)
 		return
@@ -33,7 +34,7 @@ func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 	w.Write(blob)
 }
 
-func action(contents []byte) ([]byte, error) {
+func createImage(contents []byte) ([]byte, error) {
 	canvas := image.LoadFromBlob(contents)
 	err := canvas.ResizeContain(480, 480)
 	if err != nil {
@@ -59,9 +60,16 @@ func selectText() string {
 
 func initTextSetting() image.TextSetting {
 	setting := image.NewTextSetting()
-	setting.Font = "./fonts/toroman.ttf"
-	setting.FillColor = "#ffffff"
-	setting.BorderColor = "#444444"
+	setting.Font = getFromEnv("FONT_NAME", "./fonts/toroman.ttf")
+	setting.FillColor = getFromEnv("FILL_COLOR", "#ffffff")
+	setting.BorderColor = getFromEnv("BORDER_COLOR", "#444444")
 	setting.BorderWidth = 4
 	return setting
+}
+
+func getFromEnv(envName string, defaultValue string) string {
+	if len(os.Getenv(envName)) > 0 {
+		return os.Getenv(envName)
+	}
+	return defaultValue
 }
