@@ -5,9 +5,21 @@
     <title></title>
 </head>
 <body>
-    <form action="/lgtm" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">submit</button>
-    </form>
+    <div id="app">
+        <form @dragover="onDragFile" @drop="onDropFile" style="width: 320px; height: 320px; background: #ccc;">
+        </form>
+        <div class="picture-area">
+            <ul class="picture-list">
+                <li class="picture-item" v-for="image in images">
+                    <a href="#" @click="onClickPicture($event, image)" :style="{'background-image': 'url(' + image.url + ')'}">
+                        {{image.url}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.0-rc.3/vue.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>

@@ -14,7 +14,8 @@ func main() {
 	imagick.Initialize()
 	defer imagick.Terminate()
 
-	goji.Post("/lgtm", routes.Create)
 	goji.Get("/", http.FileServer(http.Dir("./public")))
+	goji.Get("/assets/*", http.FileServer(http.Dir("./public")))
+	goji.Post("/lgtm", routes.Create)
 	goji.Serve()
 }

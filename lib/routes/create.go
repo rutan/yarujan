@@ -2,6 +2,8 @@ package routes
 
 import (
 	"../image"
+	"../uploader"
+	"encoding/json"
 	"github.com/zenazn/goji/web"
 	"io/ioutil"
 	"math/rand"
@@ -9,6 +11,10 @@ import (
 	"os"
 	"unicode/utf8"
 )
+
+type Image struct {
+	Url string `json:"url"`
+}
 
 func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
@@ -30,8 +36,11 @@ func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO: ここでS3に投げるようにする
-	w.Write(blob)
+	client := uploader.New()
+	url, err := client.UploadBlob("test-bucket", "test-key", blob)
+	w.Header().Set("Content-Type", "application/json")
+	encoder := json.NewEncoder(w)
+	encoder.Encode(Image{Url: url})
 }
 
 func createImage(contents []byte) ([]byte, error) {

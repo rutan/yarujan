@@ -1,0 +1,8 @@
+gom 'github.com/aws/aws-sdk-go/aws'
+gom 'github.com/aws/aws-sdk-go/service/s3'
+gom 'gopkg.in/gographics/imagick.v2/imagick'
+
+group :development do
+  gom 'github.com/pilu/fresh'
+end
+
