@@ -3,19 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <div id="app">
-        <form @dragover="onDragFile" @drop="onDropFile" style="width: 320px; height: 320px; background: #ccc;">
-        </form>
-        <div class="picture-area">
-            <ul class="picture-list">
-                <li class="picture-item" v-for="image in images">
-                    <a href="#" @click="onClickPicture($event, image)" :style="{'background-image': 'url(' + image.url + ')'}">
-                        {{image.url}}
-                    </a>
-                </li>
-            </ul>
+    <div id="app" class="app" style="display: none;">
+        <h1>Yarujan<small>- LGTM: looks good to me -</small></h1>
+        <div class="container">
+            <form class="upload-form" :class="{'is-dragging': dragging}" @dragover="onDragFile" @dragleave="onDragLeaveFile" @drop="onDropFile">
+                <input type="file" @change="onSelectFile">
+                <p>画像ファイルを選択<br>またはドラッグ&amp;ドロップしてください</p>
+            </form>
+        </div>
+        <div class="container">
+            <div class="picture-area">
+                <ul class="picture-list">
+                    <li class="picture-item" v-for="image in images">
+                        <a href="#" @click="onClickPicture($event, image)" :style="{'background-image': 'url(' + image.url + ')'}">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer">
+                <a href="/lgtm">API</a> | <a href="https://github.com/rutan/yarujan">Source</a>
+            </div>
+        </div>
+        <div class="modal" v-if="!!nowImage">
+            <div class="modal-box">
+                <img class="modal-picture" :src="nowImage.url">
+                <div class="modal-description">
+                    <dl>
+                        <dt>Image URL</dt>
+                        <dd>
+                            <input type="text" :value="nowImage.url">
+                        </dd>
+                        <dt>Markdown</dt>
+                        <dd>
+                            <textarea>![LGTM]({{nowImage.url}})</textarea>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button @click="onCloseModal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.min.js"></script>

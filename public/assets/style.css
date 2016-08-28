@@ -1,0 +1,208 @@
+html, body {
+    background: #fff;
+    color: #333;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    color: #2196F3;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #42A5F5;
+    text-decoration: none;
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+input:focus, textarea:focus {
+    outline: 0;
+    border-color: #2196F3;
+}
+
+button:focus {
+    outline: 0;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 868px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #2196F3;
+    font-size: 24px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 0;
+    padding: 10px 0;
+    border-top: 1px solid #2196f3;
+    border-bottom: 1px solid #2196f3;
+}
+
+h1 small {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.upload-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px auto;
+    width: 500px;
+    height: 200px;
+    padding: 15px;
+    border: 2px dotted #2196F3;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+}
+
+.upload-form.is-dragging {
+    background: #90CAF9;
+}
+
+.upload-form input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1000px;
+    opacity: 0;
+    z-index: 1;
+}
+
+.upload-form p {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #2196F3;
+}
+
+.picture-area {
+    margin: 20px auto;
+}
+
+.picture-list {
+    list-style: none;
+    padding: 0;
+    margin: -20px 0 0 -20px;
+    overflow: hidden;
+}
+
+.picture-item {
+    display: block;
+    float: left;
+    width: 128px;
+    height: 128px;
+    margin: 20px 0 0 20px;
+}
+
+.picture-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #eee no-repeat 50% 50%;
+    background-size: contain;
+}
+
+.picture-item a:hover {
+    opacity: .75;
+}
+
+.footer {
+    padding: 15px 0;
+    text-align: center;
+    font-size: 13px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, .9);
+    box-sizing: border-box;
+    z-index: 2000;
+}
+
+.modal-box {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.modal-picture {
+    float: left;
+    max-width: 240px;
+    height: auto;
+}
+
+.modal-description {
+    margin-left: 260px;
+}
+
+.modal-description dl {
+    padding: 0;
+}
+
+.modal-description dt {
+    padding: 0;
+    font-weight: bold;
+    line-height: 2;
+}
+
+.modal-description dd {
+    margin: 0;
+}
+
+.modal-description input,
+.modal-description textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.modal-description textarea {
+    height: 100px;
+}
+
+.modal-footer {
+    clear: both;
+    padding: 20px;
+}
+
+.modal-footer button {
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+    border: 0;
+    background: #2196F3;
+    color: #fff;
+    width: 200px;
+    height: 40px;
+}
+
+.modal-footer button:hover {
+    background: #42A5F5;
+}
+
+.modal-footer button:active {
+    background: #1976D2;
+}
+

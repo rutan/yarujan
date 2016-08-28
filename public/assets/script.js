@@ -3,19 +3,39 @@
         el: '#app',
         data: {
             dragging: false,
-            images: []
+            images: [],
+            nowImage: null
+        },
+        mounted: function () {
+            var self = this;
+            fetch('/lgtm').then(function (resp) {
+                return resp.json();
+            }).then(function (json) {
+                self.images = json.images;
+                self.$el.style.display = 'block';
+            });
         },
         methods: {
+            onSelectFile: function (e) {
+                this.uploadFile(e.srcElement.files[0]);
+            },
             onDragFile: function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 this.dragging = true;
-                console.log(e);
+            },
+            onDragLeaveFile: function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.dragging = false;
             },
             onDropFile: function (e) {
-                var self = this;
                 e.preventDefault();
                 var file = e.dataTransfer.files[0];
+                this.uploadFile(file);
+            },
+            uploadFile: function (file) {
+                var self = this;
                 var formData = new FormData();
                 formData.append("file", file);
                 fetch('/lgtm', {
@@ -36,6 +56,11 @@
             },
             onClickPicture: function (e, image) {
                 e.preventDefault();
+                this.nowImage = image;
+            },
+            onCloseModal: function (e) {
+                e.preventDefault();
+                this.nowImage = null;
             }
         }
     });

@@ -16,6 +16,7 @@ func main() {
 
 	goji.Get("/", http.FileServer(http.Dir("./public")))
 	goji.Get("/assets/*", http.FileServer(http.Dir("./public")))
+	goji.Get("/lgtm", routes.Index)
 	goji.Post("/lgtm", routes.Create)
 	goji.Serve()
 }

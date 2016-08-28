@@ -1,5 +1,6 @@
 gom 'github.com/aws/aws-sdk-go/aws'
 gom 'github.com/aws/aws-sdk-go/service/s3'
+gom 'github.com/tuvistavie/securerandom'
 gom 'gopkg.in/gographics/imagick.v2/imagick'
 
 group :development do

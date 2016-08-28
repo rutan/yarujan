@@ -12,6 +12,7 @@ func LoadFromBlob(blob []byte) Canvas {
 	canvas := Canvas{}
 	canvas.mw = imagick.NewMagickWand()
 	canvas.mw.ReadImageBlob(blob)
+	canvas.mw.SetFormat("jpg")
 	return canvas
 }
 

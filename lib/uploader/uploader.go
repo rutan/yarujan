@@ -20,6 +20,22 @@ func New() Uploader {
 	return u
 }
 
+func (self *Uploader) GetURLList(bucket string) ([]string, error) {
+	res, err := self.c.ListObjects(&s3.ListObjectsInput{
+		Bucket: aws.String(bucket),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	list := make([]string, len(res.Contents))
+	for i, content := range res.Contents {
+		list[i] = self.GenerateURL(bucket, *content.Key)
+	}
+
+	return list, nil
+}
+
 func (self *Uploader) UploadBlob(bucket string, key string, blob []byte) (string, error) {
 	_, err := self.c.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String(bucket),

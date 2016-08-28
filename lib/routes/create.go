@@ -4,17 +4,16 @@ import (
 	"../image"
 	"../uploader"
 	"encoding/json"
+	"github.com/tuvistavie/securerandom"
 	"github.com/zenazn/goji/web"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"os"
+	"strconv"
+	"time"
 	"unicode/utf8"
 )
-
-type Image struct {
-	Url string `json:"url"`
-}
 
 func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
@@ -37,7 +36,8 @@ func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	client := uploader.New()
-	url, err := client.UploadBlob("test-bucket", "test-key", blob)
+	key := generateKey() + ".jpg"
+	url, err := client.UploadBlob(getFromEnv("AWS_S3_BUCKET_NAME", ""), key, blob)
 	w.Header().Set("Content-Type", "application/json")
 	encoder := json.NewEncoder(w)
 	encoder.Encode(Image{Url: url})
@@ -45,6 +45,7 @@ func Create(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func createImage(contents []byte) ([]byte, error) {
 	canvas := image.LoadFromBlob(contents)
+	defer canvas.Destroy()
 	err := canvas.ResizeContain(480, 480)
 	if err != nil {
 		return nil, err
@@ -63,6 +64,7 @@ func selectText() string {
 		"いいね！",
 		"よさそう",
 		"みました",
+		"やるじゃん",
 	}
 	return TEXT_LIST[rand.Intn(len(TEXT_LIST))]
 }
@@ -81,4 +83,10 @@ func getFromEnv(envName string, defaultValue string) string {
 		return os.Getenv(envName)
 	}
 	return defaultValue
+}
+
+func generateKey() string {
+	reverseTime := 32503648140 - time.Now().Unix()
+	random, _ := securerandom.Hex(10)
+	return strconv.FormatInt(reverseTime, 10) + "_" + random
 }
