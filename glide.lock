@@ -1,0 +1,54 @@
+hash: 9c2f6656b539c1fea94be0bb09921db5d17c1104ebcb28904278a7345fd09077
+updated: 2016-08-29T01:24:11.8197495+09:00
+imports:
+- name: github.com/aws/aws-sdk-go
+  version: e39222bf4583af667250cfd83a41388937ba56d4
+  subpackages:
+  - aws
+  - aws/awserr
+  - aws/awsutil
+  - aws/client
+  - aws/client/metadata
+  - aws/corehandlers
+  - aws/credentials
+  - aws/credentials/ec2rolecreds
+  - aws/credentials/endpointcreds
+  - aws/credentials/stscreds
+  - aws/defaults
+  - aws/ec2metadata
+  - aws/request
+  - aws/session
+  - aws/signer/v4
+  - private/endpoints
+  - private/protocol
+  - private/protocol/query
+  - private/protocol/query/queryutil
+  - private/protocol/rest
+  - private/protocol/restxml
+  - private/protocol/xml/xmlutil
+  - private/waiter
+  - service/s3
+  - service/sts
+- name: github.com/go-ini/ini
+  version: 6e4869b434bd001f6983749881c7ead3545887d8
+- name: github.com/jmespath/go-jmespath
+  version: bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d
+- name: github.com/joho/godotenv
+  version: 4ed13390c0acd2ff4e371e64d8b97c8954138243
+- name: github.com/tuvistavie/securerandom
+  version: 15512123a948d62f6361bd84818e11f2ad84059a
+- name: github.com/zenazn/goji
+  version: 4d7077956293261309684d3cf1af673f773c6819
+  subpackages:
+  - bind
+  - graceful
+  - graceful/listener
+  - web
+  - web/middleware
+  - web/mutil
+- name: gopkg.in/gographics/imagick.v1
+  version: d099729bec659a0ffda4785a2226ecab0a62e2c3
+  subpackages:
+  - imagick
+  - imagick/types
+testImports: []

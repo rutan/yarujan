@@ -1,4 +1,4 @@
-# yokune
+# yarujan
 
-練習用
+yarujan is simple LGTM server.
 

@@ -1,0 +1,16 @@
+package: github.com/rutan/yarujan
+import:
+- package: github.com/aws/aws-sdk-go
+  subpackages:
+  - aws
+  - aws/credentials
+  - aws/session
+  - service/s3
+- package: github.com/joho/godotenv
+- package: github.com/tuvistavie/securerandom
+- package: github.com/zenazn/goji
+  subpackages:
+  - web
+- package: gopkg.in/gographics/imagick.v1
+  subpackages:
+  - imagick
