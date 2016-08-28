@@ -10,8 +10,7 @@ type Canvas struct {
 
 func LoadFromBlob(blob []byte) Canvas {
 	canvas := Canvas{}
-	canvas.mw = imagick.NewMagickWand()
-	canvas.mw.ReadImageBlob(blob)
+	canvas.mw = createFreshImage(blob)
 	canvas.mw.SetFormat("jpg")
 	return canvas
 }
@@ -78,4 +77,23 @@ func (self Canvas) DrawText(text string, x float64, y float64, setting *TextSett
 
 func (self Canvas) ExportBlob() []byte {
 	return self.mw.GetImageBlob()
+}
+
+func createFreshImage(blob []byte) *imagick.MagickWand {
+	mw := imagick.NewMagickWand()
+	tmw := imagick.NewMagickWand()
+	defer tmw.Destroy()
+	pw := imagick.NewPixelWand()
+	defer pw.Destroy()
+	dw := imagick.NewDrawingWand()
+	defer dw.Destroy()
+
+	tmw.ReadImageBlob(blob)
+
+	pw.SetColor("#ffffff")
+	dw.SetFillColor(pw)
+	mw.NewImage(tmw.GetImageWidth(), tmw.GetImageHeight(), pw)
+
+	mw.CompositeImage(tmw, tmw.GetImageCompose(), 0, 0)
+	return mw
 }
