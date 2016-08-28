@@ -1,10 +1,10 @@
 package main
 
 import (
-	"./lib/routes"
 	"github.com/joho/godotenv"
+	"github.com/rutan/yarujan/lib/routes"
 	"github.com/zenazn/goji"
-	"gopkg.in/gographics/imagick.v2/imagick"
+	"gopkg.in/gographics/imagick.v1/imagick"
 	"net/http"
 )
 

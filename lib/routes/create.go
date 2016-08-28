@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"../image"
-	"../uploader"
 	"encoding/json"
+	"github.com/rutan/yarujan/lib/image"
+	"github.com/rutan/yarujan/lib/uploader"
 	"github.com/tuvistavie/securerandom"
 	"github.com/zenazn/goji/web"
 	"io/ioutil"

@@ -1,9 +1,11 @@
 gom 'github.com/aws/aws-sdk-go/aws'
 gom 'github.com/aws/aws-sdk-go/service/s3'
 gom 'github.com/tuvistavie/securerandom'
-gom 'gopkg.in/gographics/imagick.v2/imagick'
+gom 'github.com/zenazn/goji'
+gom 'github.com/zenazn/goji/web'
+gom 'github.com/joho/godotenv'
+gom 'gopkg.in/gographics/imagick.v1/imagick'
 
 group :development do
   gom 'github.com/pilu/fresh'
 end
-

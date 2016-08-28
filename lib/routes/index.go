@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"../uploader"
 	"encoding/json"
+	"github.com/rutan/yarujan/lib/uploader"
 	"github.com/zenazn/goji/web"
 	"net/http"
 	"os"
